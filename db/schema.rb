@@ -10,7 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_115443) do
+ActiveRecord::Schema.define(version: 2019_04_01_000940) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "post_id_id"
+    t.integer "comment_id_id"
+    t.integer "user_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id_id"], name: "index_favorites_on_comment_id_id"
+    t.index ["post_id_id"], name: "index_favorites_on_post_id_id"
+    t.index ["user_id_id"], name: "index_favorites_on_user_id_id"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "genre_name"
+    t.integer "category_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id_id"], name: "index_genres_on_category_id_id"
+  end
+
+  create_table "post_comments", force: :cascade do |t|
+    t.string "title"
+    t.text "text"
+    t.string "image_file_id"
+    t.string "remarks"
+    t.integer "user_id_id"
+    t.integer "post_help_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_help_id_id"], name: "index_post_comments_on_post_help_id_id"
+    t.index ["user_id_id"], name: "index_post_comments_on_user_id_id"
+  end
+
+  create_table "post_helps", force: :cascade do |t|
+    t.string "title"
+    t.text "text"
+    t.string "image_file_id"
+    t.string "remarks"
+    t.integer "user_id_id"
+    t.integer "tame_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tame_id_id"], name: "index_post_helps_on_tame_id_id"
+    t.index ["user_id_id"], name: "index_post_helps_on_user_id_id"
+  end
+
+  create_table "tames", force: :cascade do |t|
+    t.string "tame_name"
+    t.integer "genre_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id_id"], name: "index_tames_on_genre_id_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
