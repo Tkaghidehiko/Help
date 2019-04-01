@@ -1,0 +1,2 @@
+class PostHelpsController < ApplicationController
+end

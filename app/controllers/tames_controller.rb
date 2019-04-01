@@ -1,0 +1,2 @@
+class TamesController < ApplicationController
+end
